@@ -29,7 +29,12 @@
 
 #include "digitalWriteFast.h" // we use pinModeFast() and digitalReadFast() and digitalWriteFast() in turn
 
-#if defined(IR_OUTPUT_IS_ACTIVE_LOW) || defined(IRSND_GENERATE_NO_SEND_RF)
+// New structure here allows users to force active high output in conjunction with NO_SEND_RF
+// This may be desired with certain recievers e.g. car audio head units such as those by Alpine
+#if defined(IR_OUTPUT_IS_ACTIVE_HIGH)
+#define IR_OUTPUT_ACTIVE_LEVEL      HIGH
+#define IR_OUTPUT_INACTIVE_LEVEL    LOW
+#elif defined(IR_OUTPUT_IS_ACTIVE_LOW) || defined(IRSND_GENERATE_NO_SEND_RF)
 #define IR_OUTPUT_ACTIVE_LEVEL      LOW
 #define IR_OUTPUT_INACTIVE_LEVEL    HIGH
 #else
