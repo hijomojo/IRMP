@@ -23,7 +23,7 @@
 
 #if defined(ARDUINO)
 #ifndef _IRSND_ARDUINO_EXT_H
-#define _IRSND_ARDUINO_EXT_H
+#  define _IRSND_ARDUINO_EXT_H
 
 #include "irmpVersion.h"
 
@@ -32,14 +32,14 @@
 // New structure here allows users to force active high output in conjunction with NO_SEND_RF
 // This may be desired with certain recievers e.g. car audio head units such as those by Alpine
 #if defined(IR_OUTPUT_IS_ACTIVE_HIGH)
-#define IR_OUTPUT_ACTIVE_LEVEL      HIGH
-#define IR_OUTPUT_INACTIVE_LEVEL    LOW
+#  define IR_OUTPUT_ACTIVE_LEVEL      HIGH
+#  define IR_OUTPUT_INACTIVE_LEVEL    LOW
 #elif defined(IR_OUTPUT_IS_ACTIVE_LOW) || defined(IRSND_GENERATE_NO_SEND_RF)
-#define IR_OUTPUT_ACTIVE_LEVEL      LOW
-#define IR_OUTPUT_INACTIVE_LEVEL    HIGH
+#  define IR_OUTPUT_ACTIVE_LEVEL      LOW
+#  define IR_OUTPUT_INACTIVE_LEVEL    HIGH
 #else
-#define IR_OUTPUT_ACTIVE_LEVEL      HIGH
-#define IR_OUTPUT_INACTIVE_LEVEL    LOW
+#  define IR_OUTPUT_ACTIVE_LEVEL      HIGH
+#  define IR_OUTPUT_INACTIVE_LEVEL    LOW
 #endif
 //
 /*
@@ -57,23 +57,23 @@ void irsnd_init(uint_fast8_t aIrsndOutputPin, uint_fast8_t aFeedbackLedPin, bool
 
 #else // defined(IRMP_IRSND_ALLOW_DYNAMIC_PINS)
 #  if !defined(IRSND_OUTPUT_PIN)                // Arduino IDE uses IRSND_OUTPUT_PIN instead of PORT and BIT
-#define IRSND_OUTPUT_PIN            4
+#    define IRSND_OUTPUT_PIN            4
 #  endif
 #endif // defined(IRMP_IRSND_ALLOW_DYNAMIC_PINS)
 
 void irsnd_data_print(Print *aSerial, IRMP_DATA *aIRMPDataPtr);
 
 #if defined(ARDUINO_ARCH_MBED) // Arduino Nano 33 BLE + Sparkfun Apollo3
-#include "mbed.h"
-#define F_CPU 0 // dummy definition to avoid warning at irsnd.hpp:27 #error F_CPU unkown
+#  include "mbed.h"
+#  define F_CPU 0 // dummy definition to avoid warning at irsnd.hpp:27 #error F_CPU unkown
 #endif
 
 #if !defined(IR_TIMING_TEST_PIN)              // Only for test purposes
-#define IR_TIMING_TEST_PIN        5
+#  define IR_TIMING_TEST_PIN        5
 #endif
 
 #if ! defined(IRSND_IR_FREQUENCY)
-#define IRSND_IR_FREQUENCY          38000
+#  define IRSND_IR_FREQUENCY          38000
 #endif
 #define IRSND_INTERRUPT_FREQUENCY   (IRSND_IR_FREQUENCY * 2)  // *2 to toggle output pin at each interrupt
 
